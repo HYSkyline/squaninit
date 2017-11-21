@@ -39,8 +39,6 @@ python-editor==1.0.3
 pytz==2017.2
 requests==2.18.4
 shutilwhich==1.1.0
-simplejson==3.12.0
-sinaweibopy==1.1.3
 six==1.10.0
 SQLAlchemy==1.1.9
 tqdm==4.11.2
