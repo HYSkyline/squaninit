@@ -57,7 +57,7 @@ class HerokuConfig(Config):
     """
     Heroku平台配置
     """
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or init_config['SQLALCHEMY_DATABASE_URI_heroku']
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL')
     SSL_DISABLE = False     # 启动 SLL 安全检查
 
     @classmethod
