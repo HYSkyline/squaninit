@@ -22,13 +22,13 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_ADMIN = os.environ.get('FLASK_ADMIN') or init_config['FLASK_ADMIN']
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or init_config['SQLALCHEMY_DATABASE_URI_dev']
 
 
 class DevelopmentConfig(Config):
     """
     开发状态
     """
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or init_config['SQLALCHEMY_DATABASE_URI_dev']
     DEBUG = True
 
 
@@ -50,12 +50,14 @@ class ProductionConfig(Config):
     """
     生产状态
     """
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or init_config['SQLALCHEMY_DATABASE_URI_dev']
 
 
 class HerokuConfig(Config):
     """
     Heroku平台配置
     """
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or init_config['SQLALCHEMY_DATABASE_URI_heroku']
     SSL_DISABLE = False     # 启动 SLL 安全检查
 
     @classmethod
