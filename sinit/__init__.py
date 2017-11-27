@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import config
 
 bootstrap = Bootstrap()
+db = SQLAlchemy()
 
 def create_app(config_name):
     """ 工厂函数，用于创建 app 实例
@@ -18,6 +19,7 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     bootstrap.init_app(app)
+    db.init_app(app)
 
     if app.config.get('SSL_DISABLE', None):
         from flask_sslify import SSLify
