@@ -3,32 +3,22 @@
 import os
 here = os.path.abspath(os.path.dirname(__file__))
 
-f = open('config.config', 'r')
-content = f.readlines()
-f.close()
-
-
-init_config = {}
-for each in content:
-    config_key, config_value = each.split(',')
-    init_config[config_key] = config_value[:-1]
-
 
 class Config:
     """
     配置基类
     """
-    SECRET_KEY = os.environ.get('SECREC_KEY') or init_config['SECRET_KEY']
+    SECRET_KEY = os.environ.get('SECREC_KEY')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    FLASK_ADMIN = os.environ.get('FLASK_ADMIN') or init_config['FLASK_ADMIN']
+    FLASK_ADMIN = os.environ.get('FLASK_ADMIN')
 
 
 class DevelopmentConfig(Config):
     """
     开发状态
     """
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or init_config['SQLALCHEMY_DATABASE_URI_dev']
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     DEBUG = True
 
 
@@ -50,14 +40,14 @@ class ProductionConfig(Config):
     """
     生产状态
     """
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or init_config['SQLALCHEMY_DATABASE_URI_dev']
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 
 class HerokuConfig(Config):
     """
     Heroku平台配置
     """
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SSL_DISABLE = False     # 启动 SLL 安全检查
 
     @classmethod
